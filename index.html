@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hapysense — Luxury Vietnam Travel Experiences | Circuits Premium sur Mesure</title>
+<meta name="description" content="Hapysense propose des voyages de luxe sur mesure au Vietnam. Circuits premium, croisières privées, treks authentiques, service 5 étoiles. Devis gratuit sous 24h.">
+<meta name="keywords" content="Vietnam, voyage luxe, circuits premium, Hanoï, Hội An, Baie d'Ha Long, Sa Pa, croisière Ha Long, trek Sapa, voyage sur mesure Vietnam">
+<meta name="author" content="Hapysense">
+<meta name="robots" content="index, follow">
+<meta name="language" content="fr">
+<link rel="canonical" href="https://hapysense.com/">
+<meta property="og:title" content="Hapysense — Luxury Vietnam Travel Experiences">
+<meta property="og:description" content="Des expériences de voyage exceptionnelles au Vietnam. Luxe, authenticité, sur mesure. Circuits premium, croisières privées, treks authentiques.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1528127269322-539801943592?w=1200&q=80">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="800">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hapysense.com">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hapysense — Luxury Vietnam Travel">
+<meta name="twitter:description" content="Voyages de luxe sur mesure au Vietnam. Circuits premium, expériences authentiques.">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1528127269322-539801943592?w=1200&q=80">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+<link rel="apple-touch-icon" href="https://images.unsplash.com/photo-1528127269322-539801943592?w=180&q=80">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0E4D64">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="preconnect" href="https://cdn.coverr.co">
+<link rel="preload" as="image" href="https://images.unsplash.com/photo-1528127269322-539801943592?w=1600&q=80" fetchpriority="high">
+<link rel="preload" as="font" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" crossorigin>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TravelAgency",
+  "name": "Hapysense",
+  "description": "Luxury Vietnam travel experiences — circuits premium, croisières privées, treks authentiques",
+  "url": "https://hapysense.com",
+  "telephone": "+84123456789",
+  "email": "contact@hapysense.com",
+  "address": { "@type": "PostalAddress", "addressCountry": "VN" },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "bestRating": "5",
+    "worstRating": "1",
+    "ratingCount": "5000"
+  },
+  "sameAs": [
+    "https://instagram.com/hapysense",
+    "https://facebook.com/hapysense",
+    "https://tiktok.com/@hapysense"
+  ]
+}
+</script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===== LOADING SCREEN ===== -->
+<div id="loader">
+  <div class="loader-logo">Hapy<span>sense</span></div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+
+<!-- ===== PAGE TRANSITION ===== -->
+<div class="page-x" id="pageTransition"></div>
+
+<!-- ===== TOP BAR ===== -->
+<div class="top-bar">
+  <select class="lang-select" onchange="setLang(this.value)">
+    <option value="fr">🇫🇷 FR</option>
+    <option value="en">🇬🇧 EN</option>
+    <option value="vi">🇻🇳 VI</option>
+  </select>
+  <span class="sep">|</span>
+  <select class="currency-select" onchange="setCurrency(this.value)">
+    <option value="USD">$ USD</option>
+    <option value="EUR">€ EUR</option>
+    <option value="VND">₫ VND</option>
+  </select>
+  <span class="sep">|</span>
+  <button class="icon-btn" onclick="toggleTheme()" style="width:24px;height:24px;font-size:.5rem;background:transparent;color:rgba(255,255,255,.5)" id="themeIcon">
+    <i class="fas fa-moon"></i>
+  </button>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="header-inner">
+    <a href="#" class="header-logo">Hapy<span>sense</span></a>
+    <nav class="header-nav">
+      <a href="#destinations">Destinations</a>
+      <a href="#tours">Circuits</a>
+      <a href="#builder">Configurateur</a>
+      <a href="#reviews">Avis</a>
+      <a href="#blog">Blog</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" onclick="toggleTheme()" style="display:none" id="themeBtn"><i class="fas fa-moon" id="themeIcon2"></i></button>
+      <button class="icon-btn" onclick="toggleMusic()" id="musicBtn" title="Musique asiatique" style="font-size:.8rem"><i class="fas fa-music"></i></button>
+      <a href="#tours" class="btn-header">Réserver</a>
+      <div class="mobile-toggle" onclick="toggleMobile()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== MOBILE MENU ===== -->
+<div class="mobile-overlay" onclick="closeMobile()"></div>
+<div class="mobile-menu">
+  <a href="#destinations" onclick="closeMobile()"><i class="fas fa-map-marker-alt"></i> Destinations</a>
+  <a href="#tours" onclick="closeMobile()"><i class="fas fa-suitcase"></i> Circuits</a>
+  <a href="#builder" onclick="closeMobile()"><i class="fas fa-tools"></i> Configurateur</a>
+  <a href="#reviews" onclick="closeMobile()"><i class="fas fa-star"></i> Avis</a>
+  <a href="#blog" onclick="closeMobile()"><i class="fas fa-newspaper"></i> Blog</a>
+  <a href="#faq" onclick="closeMobile()"><i class="fas fa-question-circle"></i> FAQ</a>
+  <a href="#contact" onclick="closeMobile()"><i class="fas fa-envelope"></i> Contact</a>
+  <hr style="border:none;border-top:1px solid var(--border);margin:8px 0">
+  <a href="#tours" class="btn-header" style="text-align:center;justify-content:center;margin-top:8px" onclick="closeMobile()">Réserver maintenant</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1528127269322-539801943592?w=1600&q=80">
+    <source src="https://cdn.coverr.co/videos/coverr-traditional-vietnamese-fishing-boat-on-the-river-5763/1080p.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-pattern"></div>
+  <div class="floating-lotus"><i class="fas fa-leaf"></i></div>
+  <div class="floating-lotus lotus-2"><i class="fas fa-leaf"></i></div>
+  <div class="floating-lotus lotus-3"><i class="fas fa-leaf"></i></div>
+  <div class="lantern-particle" style="left:10%"><i class="fas fa-lightbulb"></i></div>
+  <div class="lantern-particle" style="left:30%;animation-delay:3s"><i class="fas fa-lightbulb"></i></div>
+  <div class="lantern-particle" style="left:55%;animation-delay:6s"><i class="fas fa-lightbulb"></i></div>
+  <div class="lantern-particle" style="left:80%;animation-delay:2s"><i class="fas fa-lightbulb"></i></div>
+  <div class="container" style="position:relative;z-index:2;width:100%">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i class="fas fa-gem"></i> Luxury Travel Experiences
+      </div>
+      <h1>Discover Vietnam<br><em>Differently</em></h1>
+      <p>Des croisières privées en baie d'Ha Long aux treks chez les ethnies de Sa Pa, vivez le Vietnam comme jamais — sur mesure, premium, inoubliable.</p>
+      <div class="hero-search">
+        <div class="sg">
+          <i class="fas fa-tag"></i>
+          <select>
+            <option>Type de voyage</option>
+            <option>Backpacker</option>
+            <option>Évasion</option>
+            <option>Aventure</option>
+            <option>Culture</option>
+            <option>Plage & Détente</option>
+            <option>Luxe & Premium</option>
+            <option>Romantique</option>
+          </select>
+        </div>
+        <div class="sg">
+          <i class="fas fa-wallet"></i>
+          <select>
+            <option>Budget</option>
+            <option>Moins de 500€</option>
+            <option>500€ - 1000€</option>
+            <option>1000€ - 2000€</option>
+            <option>2000€ - 5000€</option>
+            <option>5000€+</option>
+          </select>
+        </div>
+        <div class="sg">
+          <i class="far fa-calendar"></i>
+          <select>
+            <option>Durée</option>
+            <option>7 jours</option>
+            <option>10 jours</option>
+            <option>15 jours</option>
+            <option>18 jours</option>
+            <option>30 jours</option>
+            <option>Sur mesure</option>
+          </select>
+        </div>
+        <button class="hero-search-btn" onclick="showToast('🔍 Recherche en cours...')"><i class="fas fa-search"></i> Explorer</button>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-num">5 000+</div><div class="stat-label">Voyageurs</div></div>
+        <div><div class="stat-num">150+</div><div class="stat-label">Circuits</div></div>
+        <div><div class="stat-num">4.9★</div><div class="stat-label">Avis</div></div>
+        <div><div class="stat-num">99%</div><div class="stat-label">Satisfaction</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Défiler</span>
+    <i class="fas fa-chevron-down"></i>
+  </div>
+</section>
+
+<!-- ===== DESTINATIONS ===== -->
+<section class="section section-alt" id="destinations">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge">Destinations</div>
+      <h2>Explorez le <em>Vietnam</em> autrement</h2>
+      <p>Des rizières de Sa Pa aux plages de Phú Quốc, chaque destination est une invitation à l'émerveillement.</p>
+    </div>
+    <div class="grid grid-3" id="destGrid"></div>
+  </div>
+</section>
+
+<!-- ===== VIDEO DIVIDER ===== -->
+<section class="video-divider">
+  <video class="video-divider-vid" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1504630083234-14187a9df0f5?w=1200&q=80">
+    <source src="https://cdn.coverr.co/videos/coverr-woman-in-a-rice-field-in-vietnam-5770/1080p.mp4" type="video/mp4">
+  </video>
+  <div class="video-divider-overlay"></div>
+  <div class="video-divider-content">
+    <div class="section-badge" style="color:var(--gold)">En mouvement</div>
+    <h2>Le Vietnam <em>prend vie</em></h2>
+    <p>Des rizières de Sapa aux marchés flottants du Mékong — chaque instant est une découverte.</p>
+  </div>
+</section>
+
+<!-- ===== TOURS ===== -->
+<section class="section" id="tours">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge">Circuits Premium</div>
+      <h2>Des expériences <em>exceptionnelles</em></h2>
+      <p>Chaque circuit est conçu avec passion pour vous offrir le meilleur du Vietnam.</p>
+    </div>
+    <div class="filters" id="tourFilters">
+      <button class="filter-btn active" data-filter="all" onclick="setFilter('all')">Tous</button>
+      <button class="filter-btn" data-filter="backpacker" onclick="setFilter('backpacker')">🎒 Backpacker</button>
+      <button class="filter-btn" data-filter="escape" onclick="setFilter('escape')">🌅 Évasion</button>
+      <button class="filter-btn" data-filter="culture" onclick="setFilter('culture')">🏛 Culture</button>
+      <button class="filter-btn" data-filter="adventure" onclick="setFilter('adventure')">🏔 Aventure</button>
+      <button class="filter-btn" data-filter="beach" onclick="setFilter('beach')">🏖 Plage</button>
+      <button class="filter-btn" data-filter="gastronomy" onclick="setFilter('gastronomy')">🍜 Gastronomie</button>
+      <button class="filter-btn" data-filter="luxury" onclick="setFilter('luxury')">💎 Luxe</button>
+      <button class="filter-btn" data-filter="premium" onclick="setFilter('premium')">👑 Premium</button>
+      <button class="filter-btn" data-filter="romantic" onclick="setFilter('romantic')">💕 Romantique</button>
+    </div>
+    <div class="tour-grid" id="tourGrid"></div>
+  </div>
+</section>
+
+<!-- ===== REVIEWS ===== -->
+<section class="section section-alt" id="reviews">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge">Avis Clients</div>
+      <h2>Ce qu'ils disent <em>de nous</em></h2>
+      <p>5 000+ voyageurs satisfaits — note moyenne 4.9/5</p>
+    </div>
+    <div class="stats-row reveal" id="statsRow">
+      <div class="stat-item"><div class="stat-num">5000+</div><div class="label">Voyageurs</div></div>
+      <div class="stat-item"><div class="stat-num">150+</div><div class="label">Circuits</div></div>
+      <div class="stat-item"><div class="stat-num">4.9★</div><div class="label">Note moyenne</div></div>
+      <div class="stat-item"><div class="stat-num">99%</div><div class="label">Satisfaction</div></div>
+    </div>
+    <div class="review-grid" id="reviewGrid"></div>
+  </div>
+</section>
+
+<!-- ===== BLOG ===== -->
+<section class="section" id="blog">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge">Blog</div>
+      <h2>Conseils & <em>Inspiration</em></h2>
+      <p>Guide, astuces, culture et gastronomie pour préparer votre voyage.</p>
+    </div>
+    <div class="grid grid-3" id="blogGrid"></div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="section section-alt" id="contact">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge">Contact</div>
+      <h2>Une question ? <em>Écrivez-nous</em></h2>
+      <p>Notre équipe est joignable 7j/7. Réponse sous 24h ouvrées.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Parlons de votre voyage</h3>
+        <p>Que vous ayez un circuit en tête ou besoin d'inspiration, nos conseillers experts sont là pour créer le voyage parfait.</p>
+        <div class="ci-item">
+          <div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div>
+            <strong>Adresse</strong>
+            <p>Hanoï — Hội An — Saigon, Vietnam</p>
+          </div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon"><i class="fas fa-phone-alt"></i></div>
+          <div>
+            <strong>Téléphone / WhatsApp</strong>
+            <p><a href="tel:+84123456789">+84 123 456 789</a></p>
+          </div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon"><i class="fas fa-envelope"></i></div>
+          <div>
+            <strong>Email</strong>
+            <p><a href="mailto:contact@hapysense.com">contact@hapysense.com</a></p>
+          </div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon"><i class="far fa-clock"></i></div>
+          <div>
+            <strong>Disponibilité</strong>
+            <p>Lun-Sam: 8h-20h (UTC+7) · Dim: 9h-17h</p>
+          </div>
+        </div>
+        <div class="contact-social">
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <form class="contact-form" onsubmit="submitContact(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="contactName">Nom complet</label>
+            <input type="text" id="contactName" name="name" placeholder="Sophie Martin" required>
+          </div>
+          <div class="form-group">
+            <label for="contactEmail">Email</label>
+            <input type="email" id="contactEmail" name="email" placeholder="sophie@email.com" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="contactSubject">Sujet</label>
+          <select id="contactSubject" name="subject">
+            <option value="info">Demande d'information</option>
+            <option value="quote">Devis personnalisé</option>
+            <option value="booking">Réservation</option>
+            <option value="other">Autre</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="contactMsg">Message</label>
+          <textarea id="contactMsg" name="message" rows="4" placeholder="Décrivez votre projet de voyage, vos dates, vos envies..." required></textarea>
+        </div>
+        <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> Envoyer le message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge">FAQ</div>
+      <h2>Questions <em>fréquentes</em></h2>
+      <p>Tout ce que vous devez savoir avant de réserver votre voyage au Vietnam.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">Comment réserver un circuit ? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-a">Choisissez votre circuit, remplissez le formulaire de réservation, et notre équipe vous contacte sous 24h avec un devis personnalisé. Aucun paiement n'est demandé avant validation.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">Quels sont les moyens de paiement acceptés ? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-a">Nous acceptons PayPal, Stripe (carte bancaire) et 2Checkout. Tous les paiements sont sécurisés et chiffrés.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">Puis-je personnaliser un circuit ? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-a">Absolument. Chaque circuit est sur mesure. Notre équipe adapte les activités, l'hébergement et la durée selon vos préférences.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">Quel est le délai d'annulation ? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-a">Annulation gratuite jusqu'à 30 jours avant le départ. Entre 15 et 30 jours : 50% de remboursement. Moins de 15 jours : non remboursable.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">Faut-il un visa pour le Vietnam ? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-a">Les ressortissants français, belges et suisses bénéficient de l'exemption de visa pour 45 jours. Au-delà ou pour d'autres nationalités, notre équipe vous accompagne dans les démarches.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRIP CONFIGURATOR ===== -->
+<section class="builder-section" id="builder">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge">Configurateur</div>
+      <h2>Construis <em>ton</em> voyage <span style="color:var(--gold)">à la carte</span></h2>
+      <p>Choisis ton pack, ajoute les activités que tu veux, et vois le prix évoluer en temps réel. Simple, rapide, sur mesure.</p>
+    </div>
+    <div id="builderContainer"></div>
+  </div>
+</section>
+
+<!-- ===== BACKPACKER CUSTOMERS ===== -->
+<section class="bp-customers" id="bp-clients">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge">Backpackers</div>
+      <h2>Ils ont voyagé <em>avec nous</em></h2>
+      <p>Des voyageurs du monde entier partagent leur expérience Hapysense.</p>
+    </div>
+    <div class="bp-grid" id="bpGrid"></div>
+  </div>
+</section>
+
+<!-- ===== MANAGEMENT GUIDE ===== -->
+<section class="management-section" id="manage">
+  <div class="container">
+    <div class="section-header" style="max-width:640px">
+      <div class="section-badge">Administration</div>
+      <h2>Comment gérer <em>le site</em></h2>
+      <p>Plateforme clé en main — voici comment recevoir les données et personnaliser le contenu.</p>
+    </div>
+    <div class="mg-grid">
+      <div class="mg-card">
+        <div class="mg-icon"><i class="fas fa-database"></i></div>
+        <h4>Où vont les réservations ?</h4>
+        <p>Les formulaires (contact, réservation, newsletter) sont actuellement affichés dans la console du navigateur et via des toasts de confirmation.</p>
+        <code>F12 → Console → Booking/Contact data</code>
+      </div>
+      <div class="mg-card">
+        <div class="mg-icon"><i class="fas fa-plug"></i></div>
+        <h4>Connecter un backend</h4>
+        <p>Pour recevoir les données par email ou dans une base de données, remplace les fonctions <code>submitBooking</code> et <code>submitContact</code> dans <code>script.js</code> :</p>
+        <code>fetch('/api/booking', { method:'POST', body: JSON.stringify(data) })</code>
+        <p style="font-size:.55rem;color:var(--text3);margin-top:6px">Solutions simples : Formspree (gratuit), EmailJS, ou un script PHP.</p>
+      </div>
+      <div class="mg-card">
+        <div class="mg-icon"><i class="fas fa-edit"></i></div>
+        <h4>Modifier les circuits</h4>
+        <p>Clique sur le bouton ⚙️ en bas à droite (admin toggle) pour éditer les titres, prix, et durées en mémoire.</p>
+        <code>script.js → const tours = [...]</code>
+        <p style="font-size:.55rem;color:var(--text3);margin-top:6px">Les données sont stockées dans le tableau JS. Modifie-le directement pour des changements permanents.</p>
+      </div>
+    </div>
+    <div class="mg-grid" style="margin-top:16px">
+      <div class="mg-card">
+        <div class="mg-icon"><i class="fas fa-images"></i></div>
+        <h4>Changer les images</h4>
+        <p>Toutes les images viennent d'Unsplash. Remplace les URLs dans les tableaux <code>destinations</code>, <code>tours</code>, et <code>blogPosts</code> dans script.js.</p>
+        <code>img: 'https://images.unsplash.com/...'</code>
+      </div>
+      <div class="mg-card">
+        <div class="mg-icon"><i class="fas fa-language"></i></div>
+        <h4>Traductions & Devises</h4>
+        <p>Les sélecteurs en haut à gauche (FR/EN/VI + USD/EUR/VND) sont fonctionnels. Ajoute des traductions dans les tableaux de données.</p>
+        <code>titleFr, titleVi, nameFr, nameVi</code>
+      </div>
+      <div class="mg-card">
+        <div class="mg-icon"><i class="fas fa-upload"></i></div>
+        <h4>Mettre en ligne</h4>
+        <p>Héberge gratuitement sur GitHub Pages, Netlify, ou Vercel. Push les 7 fichiers du dossier et c'est en ligne !</p>
+        <code>git push origin main</code>
+        <p style="font-size:.55rem;color:var(--text3);margin-top:6px">Aucune configuration serveur nécessaire — site 100% statique.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta" style="background:linear-gradient(135deg,rgba(8,50,65,.85),rgba(14,77,100,.75),rgba(26,107,135,.7))">
+  <video class="cta-video" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1528127269322-539801943592?w=1200&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0">
+    <source src="https://cdn.coverr.co/videos/coverr-traditional-vietnamese-fishing-boat-on-the-river-5763/1080p.mp4" type="video/mp4">
+  </video>
+  <div class="cta-content">
+      <h2>Prêt à vivre <em>votre</em> Vietnam ?</h2>
+      <p>Laissez-nous créer le voyage de vos rêves. Un conseiller dédié vous répond sous 24h.</p>
+      <div class="cta-btns">
+        <button class="btn-cta btn-cta-primary" onclick="openBooking()"><i class="fas fa-paper-plane"></i> Demander un devis</button>
+        <a href="tel:+84123456789" class="btn-cta btn-cta-outline"><i class="fas fa-phone-alt"></i> +84 123 456 789</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">Hapy<span>sense</span></div>
+        <p>Plateforme de voyages de luxe sur mesure au Vietnam. Des expériences authentiques, un service d'exception.</p>
+        <div class="footer-social">
+          <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://tiktok.com" target="_blank" rel="noopener" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+          <a href="https://wa.me/84123456789" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="mailto:contact@hapysense.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Destinations</h4>
+        <a href="#destinations">Hanoï</a>
+        <a href="#destinations">Hội An</a>
+        <a href="#destinations">Baie d'Ha Long</a>
+        <a href="#destinations">Sa Pa</a>
+        <a href="#destinations">Phú Quốc</a>
+        <a href="#destinations">Hué</a>
+      </div>
+      <div class="footer-col">
+        <h4>Circuits</h4>
+        <a href="#tours" onclick="setFilter('luxury')">Luxe</a>
+        <a href="#tours" onclick="setFilter('adventure')">Aventure</a>
+        <a href="#tours" onclick="setFilter('culture')">Culture</a>
+        <a href="#tours" onclick="setFilter('romantic')">Romantique</a>
+        <a href="#tours" onclick="setFilter('family')">Famille</a>
+        <a href="#tours" onclick="setFilter('beach')">Plage</a>
+      </div>
+      <div class="footer-col">
+        <h4>Infos</h4>
+        <a href="#faq">FAQ</a>
+        <a href="#blog">Blog</a>
+        <a href="#manage">Guide d'administration</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Newsletter</h4>
+        <p style="font-size:.68rem;color:rgba(255,255,255,.25);margin-bottom:8px">Recevez nos offres exclusives et conseils voyage.</p>
+        <form class="newsletter" onsubmit="submitNewsletter(event)">
+          <input type="email" placeholder="Votre email" required>
+          <button type="submit"><i class="fas fa-arrow-right"></i></button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Hapysense. Luxury Vietnam Travel.</p>
+      <p>Made with <i class="fas fa-heart" style="color:var(--secondary)"></i> for Vietnam</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== TOUR DETAIL PANEL ===== -->
+<div class="tour-detail" id="tourDetail"></div>
+
+<!-- ===== BOOKING MODAL ===== -->
+<div class="modal-overlay" id="bookingModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeBooking()"><i class="fas fa-times"></i></button>
+    <h2>Demande de réservation</h2>
+    <p>Remplissez ce formulaire pour recevoir votre devis personnalisé sous 24h. <strong style="color:var(--secondary)">100% gratuit et sans engagement.</strong></p>
+    <form onsubmit="submitBooking(event)">
+      <div class="field">
+        <label>Nom complet</label>
+        <input type="text" name="name" placeholder="Sophie Martin" required>
+      </div>
+      <div class="field">
+        <label>Email</label>
+        <input type="email" name="email" placeholder="sophie@email.com" required>
+      </div>
+      <div class="field">
+        <label>Téléphone / WhatsApp</label>
+        <input type="tel" name="phone" placeholder="+33 6 12 34 56 78" required>
+      </div>
+      <div class="field">
+        <label>Pays</label>
+        <select name="country">
+          <option value="FR">France</option>
+          <option value="BE">Belgique</option>
+          <option value="CH">Suisse</option>
+          <option value="CA">Canada</option>
+          <option value="VN">Vietnam</option>
+          <option value="other">Autre</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Circuit souhaité</label>
+        <select name="tour">
+          <option>Ha Long Bay Luxury Cruise</option>
+          <option>Sapa Trek & Rice Terraces</option>
+          <option>Hoi An Lantern Discovery</option>
+          <option>Hue Imperial Heritage</option>
+          <option>Ninh Binh Hidden Gems</option>
+          <option>Phu Quoc Island Escape</option>
+          <option>Saigon & Cu Chi Tunnels</option>
+          <option>Hanoi & Mountain Retreat</option>
+          <option>Sur mesure — Je ne sais pas encore</option>
+        </select>
+      </div>
+      <div class="field" style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div><label>Voyageurs</label><select name="guests"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5+</option></select></div>
+        <div><label>Budget estimé</label><select name="budget"><option>Moins de 500$</option><option selected>500-1000$</option><option>1000-2000$</option><option>2000-5000$</option><option>5000$+</option></select></div>
+      </div>
+      <div class="field">
+        <label>Lieu de prise en charge</label>
+        <input type="text" name="pickup" placeholder="Aéroport de Hanoï, Hôtel à Saigon...">
+      </div>
+      <div class="field">
+        <label>Message / Demandes spéciales</label>
+        <textarea name="message" rows="2" placeholder="Régime alimentaire, allergies, préférences..."></textarea>
+      </div>
+      <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+        <button type="button" class="pay-btn paypal" onclick="payWith('paypal')"><i class="fab fa-paypal"></i> PayPal</button>
+        <button type="button" class="pay-btn stripe" onclick="payWith('stripe')"><i class="fas fa-credit-card"></i> Stripe</button>
+        <button type="button" class="pay-btn checkout" onclick="payWith('checkout')"><i class="fas fa-lock"></i> 2Checkout</button>
+      </div>
+      <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> Envoyer ma demande</button>
+    </form>
+    <div style="text-align:center;margin-top:12px;font-size:.6rem;color:var(--text-lighter)">
+      <i class="fas fa-shield-alt"></i> Vos informations sont confidentielles
+    </div>
+  </div>
+</div>
+
+<!-- ===== ADMIN PANEL ===== -->
+<button class="admin-toggle" onclick="toggleAdmin()" title="Admin"><i class="fas fa-cog"></i></button>
+<div class="admin-panel" id="adminPanel">
+  <h3>⚙️ Admin — Éditer les circuits</h3>
+  <div class="field">
+    <label>Circuit</label>
+    <select id="adminTourId" onchange="loadTourAdmin()"></select>
+  </div>
+  <div class="field">
+    <label>Titre</label>
+    <input id="adminTitle" placeholder="Titre du circuit">
+  </div>
+  <div class="field" style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+    <div><label>Prix ($)</label><input id="adminPrice" type="number" placeholder="499"></div>
+    <div><label>Durée</label><input id="adminDur" placeholder="4 jours"></div>
+  </div>
+  <button class="admin-btn" onclick="saveTourEdit()">💾 Sauvegarder</button>
+  <hr style="border:none;border-top:1px solid var(--border);margin:16px 0">
+  <p style="font-size:.6rem;color:var(--text-lighter)">Modifications en mémoire (session). Pour des changements permanents, édite script.js → const tours.</p>
+  <p style="font-size:.55rem;color:var(--text-lighter);margin-top:4px">PayPal / Stripe / 2Checkout — modules prêts pour intégration backend. Voir section "Comment gérer le site" en bas de page.</p>
+</div>
+
+<!-- ===== TOAST ===== -->
+<div id="toast"><i class="fas fa-check-circle"></i><span id="toastMsg">Message envoyé</span></div>
+
+<!-- ===== BACK TO TOP ===== -->
+<button id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-arrow-up"></i></button>
+
+<!-- ===== ASIAN MUSIC ===== -->
+<audio id="asiaMusic" loop preload="none">
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<!-- ===== COOKIE CONSENT ===== -->
+<div id="cookieConsent">
+  <div class="cookie-text">
+    <i class="fas fa-cookie-bite"></i> Nous utilisons des cookies pour améliorer votre expérience. En continuant, vous acceptez notre <a href="#">politique de confidentialité</a>.
+  </div>
+  <div class="cookie-btns">
+    <button class="cookie-btn cookie-accept" onclick="acceptCookies()">Accepter</button>
+    <button class="cookie-btn cookie-decline" onclick="declineCookies()">Refuser</button>
+  </div>
+</div>
+
+<!-- ===== SCRIPTS ===== -->
+<script src="script.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
+}
+</script>
+</body>
+</html>
