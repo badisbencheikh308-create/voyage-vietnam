@@ -1,7 +1,7 @@
 {
-  "name": "Hapysense — Luxury Vietnam Travel",
+  "name": "Hapysense — Voyages Vietnam sur Mesure",
   "short_name": "Hapysense",
-  "description": "Premium luxury travel experiences in Vietnam. Bespoke tours, private cruises, authentic adventures.",
+  "description": "Voyages sur mesure au Vietnam. Circuits backpacker, évasion, luxe et premium.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#FAF8F5",
@@ -9,13 +9,13 @@
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "https://images.unsplash.com/photo-1528127269322-539801943592?w=192&q=80",
+      "src": "https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=192&q=80",
       "sizes": "192x192",
       "type": "image/webp",
       "purpose": "any maskable"
     },
     {
-      "src": "https://images.unsplash.com/photo-1528127269322-539801943592?w=512&q=80",
+      "src": "https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=512&q=80",
       "sizes": "512x512",
       "type": "image/webp",
       "purpose": "any maskable"
